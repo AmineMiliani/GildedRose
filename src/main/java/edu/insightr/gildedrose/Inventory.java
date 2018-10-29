@@ -17,11 +17,14 @@ public class Inventory {
                 new Item("Elixir of the Mongoose", 5, 7),
                 new Item("Sulfuras, Hand of Ragnaros", 0, 80),
                 new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
-                new Item("Conjured Mana Cake", 3, 6)
+                new Item("Conjured Mana Cake", 1, 16)
         };
 
     }
-
+    public Item[] getItems()
+    {
+        return items;
+    }
     public void printInventory() {
         System.out.println("***************");
         for (Item item : items) {
@@ -37,7 +40,14 @@ public class Inventory {
                     && items[i].getName() != "Backstage passes to a TAFKAL80ETC concert") {
                 if (items[i].getQuality() > 0) {
                     if (items[i].getName() != "Sulfuras, Hand of Ragnaros") {
-                        items[i].setQuality(items[i].getQuality() - 1);
+                        //items[i].setQuality(items[i].getQuality() - 1);
+
+                        if(items[i].getName().contains("Conjured")){
+                            items[i].setQuality(items[i].getQuality() - 2);
+                        }
+                        else{
+                            items[i].setQuality(items[i].getQuality() - 1);
+                        }
                     }
                 }
             } else {
@@ -64,12 +74,18 @@ public class Inventory {
                 items[i].setSellIn(items[i].getSellIn() - 1);
             }
 
-            if (items[i].getSellIn() < 0) {
+            if (items[i].getSellIn() <0) {
                 if (items[i].getName() != "Aged Brie") {
                     if (items[i].getName() != "Backstage passes to a TAFKAL80ETC concert") {
                         if (items[i].getQuality() > 0) {
                             if (items[i].getName() != "Sulfuras, Hand of Ragnaros") {
-                                items[i].setQuality(items[i].getQuality() - 1);
+
+                                if(items[i].getName().contains("Conjured")){
+                                    items[i].setQuality(items[i].getQuality() - 2);
+                                }
+                                else{
+                                    items[i].setQuality(items[i].getQuality() - 1);
+                                }
                             }
                         }
                     } else {
