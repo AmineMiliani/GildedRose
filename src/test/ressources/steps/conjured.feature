@@ -3,6 +3,6 @@ Feature: Conjured Item
 
   Scenario: conjured item update
     Given I have a new inventory
-    Then the quality of the conjured item is 6
+    Then the quality of the conjured item is 16
     When I update the inventory
-    Then the quality of the conjured item is 4
+    Then the quality of the conjured item is 14
