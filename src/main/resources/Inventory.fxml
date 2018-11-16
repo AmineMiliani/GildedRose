@@ -8,7 +8,7 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.insightr.gildedrose.Controller">
     <children>
         <ListView fx:id="listViewItems" layoutX="216.0" layoutY="35.0" prefHeight="250.0" prefWidth="342.0" />
-        <Button fx:id="buttonUpdate" layoutX="449.0" layoutY="307.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="109.0" text="Update" />
+        <Button fx:id="buttonUpdate" layoutX="449.0" layoutY="307.0" mnemonicParsing="false" onAction="#OnUpdate" prefHeight="60.0" prefWidth="109.0" text="Update" />
         <Button fx:id="buttonAdd" layoutX="236.0" layoutY="328.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="74.0" text="Add" />
         <ListView fx:id="listViewTestResult" layoutX="14.0" layoutY="35.0" prefHeight="250.0" prefWidth="182.0" />
         <Button fx:id="buttonTest" layoutX="41.0" layoutY="307.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="128.0" text="Test" />
