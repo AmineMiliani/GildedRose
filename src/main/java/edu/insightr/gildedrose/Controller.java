@@ -79,7 +79,17 @@ public class Controller implements Initializable {
 
     public void DisplayInventory() {
         ObservableList<Item> itemList = FXCollections.observableArrayList(inventory.getItems());
-        listViewItems.setItems(itemList);
+        ObservableList<Item> newitemList = FXCollections.observableArrayList(inventory.getItems());
+        newitemList.remove(0, newitemList.size());
+        for (int i = 0; i  < itemList.size(); i++){
+
+            if(itemList.get(i) != null)
+            {
+                newitemList.add(itemList.get(i));
+            }
+        }
+
+        listViewItems.setItems(newitemList);
     }
 
     public  void OnUpdate()
@@ -101,15 +111,21 @@ public class Controller implements Initializable {
 
     public void OnAdd ()
     {
-
+        try{
         String selIn = selInBox.getText();
         int selInInt = Integer.parseInt(selIn);
         String quality = qualityBox.getText();
         int qualityInt = Integer.parseInt(quality);
         String name = nameBox.getText();
 
-        inventory.Add(name, selInInt, qualityInt);
-        DisplayInventory();
+            inventory.Add(name, selInInt, qualityInt);
+            DisplayInventory();
+        }
+        catch(Exception e ) {
+        }
+
+        }
+
 
 
     }
@@ -117,4 +133,4 @@ public class Controller implements Initializable {
 
 
 
-}
+
