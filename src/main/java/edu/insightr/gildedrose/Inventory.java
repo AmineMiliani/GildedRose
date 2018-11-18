@@ -2,7 +2,10 @@ package edu.insightr.gildedrose;
 
 public class Inventory {
 
-    private Item[] items;
+    private Item[] items ;
+    int compteur = 6;
+
+
 
     public Inventory(Item[] items) {
         super();
@@ -11,20 +14,43 @@ public class Inventory {
 
     public Inventory() {
         super();
+
         items = new Item[]{
                 new Item("+5 Dexterity Vest", 10, 20),
                 new Item("Aged Brie", 2, 0),
                 new Item("Elixir of the Mongoose", 5, 7),
                 new Item("Sulfuras, Hand of Ragnaros", 0, 80),
                 new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
-                new Item("Conjured Mana Cake", 1, 16)
+                new Item("Conjured Mana Cake", 1, 16),
+                new Item("",0,0),
+                new Item("",0,0),
+                new Item("",0,0),
+                new Item("",0,0),
+                new Item("",0,0),
+                new Item("",0,0),
+                new Item("",0,0)
+
+
         };
+
+
+
+
+
 
     }
     public Item[] getItems()
     {
         return items;
     }
+
+    public void setItems(Item[] items )
+    {
+        this.items=items;
+    }
+
+
+
     public void printInventory() {
         System.out.println("***************");
         for (Item item : items) {
@@ -99,6 +125,19 @@ public class Inventory {
             }
         }
     }
+
+
+    public void Delete (int selectedIdx)
+    {
+       items[selectedIdx]= null;
+    }
+
+    public void Add (String name,int selIn,int quality)
+    {
+        items[compteur]= new Item (name,selIn,quality);
+        compteur++;
+    }
+
 
     public static void main(String[] args) {
         Inventory inventory = new Inventory();

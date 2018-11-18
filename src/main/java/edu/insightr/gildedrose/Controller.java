@@ -12,6 +12,11 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.TextField;
+
+import javax.xml.soap.Text;
 
 
 public class Controller implements Initializable {
@@ -49,6 +54,22 @@ public class Controller implements Initializable {
 
     @FXML
     private Label labelList;
+
+    @FXML
+    private TextField selInBox;
+
+    @FXML
+    private TextField nameBox;
+
+    @FXML
+    private TextField qualityBox;
+
+    @FXML
+    private Button buttonOk;
+
+
+
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
         inventory = new Inventory();
@@ -66,4 +87,34 @@ public class Controller implements Initializable {
         inventory.updateQuality();
         DisplayInventory();
     }
+
+
+
+    public  void OnDelete()
+    {
+        int selectedIdx = listViewItems.getSelectionModel().getSelectedIndex();
+        inventory.Delete(selectedIdx);
+        DisplayInventory();
+
+    }
+
+
+    public void OnAdd ()
+    {
+
+        String selIn = selInBox.getText();
+        int selInInt = Integer.parseInt(selIn);
+        String quality = qualityBox.getText();
+        int qualityInt = Integer.parseInt(quality);
+        String name = nameBox.getText();
+
+        inventory.Add(name, selInInt, qualityInt);
+        DisplayInventory();
+
+
+    }
+
+
+
+
 }

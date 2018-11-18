@@ -17,7 +17,7 @@ public class Main extends Application {
         try {
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Inventory.fxml"));
             primaryStage.setTitle("Main Window");
-            primaryStage.setScene(new Scene(root, 600, 400));
+            primaryStage.setScene(new Scene(root, 650, 500));
             primaryStage.show();
         }
         catch(Exception e) {

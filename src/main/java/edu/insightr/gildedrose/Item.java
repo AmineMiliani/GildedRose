@@ -38,6 +38,9 @@ public class Item {
         this.quality = quality;
     }
 
+    public void RemoveAt(int ligne)
+    {}
+
     @Override
     public String toString() {
         return "Item{" +
