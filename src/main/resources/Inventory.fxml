@@ -10,17 +10,15 @@
     <children>
         <ListView fx:id="listViewItems" layoutX="216.0" layoutY="35.0" prefHeight="250.0" prefWidth="342.0" />
         <Button fx:id="buttonUpdate" layoutX="449.0" layoutY="307.0" mnemonicParsing="false" onAction="#OnUpdate" prefHeight="60.0" prefWidth="109.0" text="Update" />
-        <Button fx:id="buttonAdd" layoutX="150.0" layoutY="416.0" mnemonicParsing="false" onAction="#OnAdd" prefHeight="26.0" prefWidth="74.0" text="Add" />
+        <Button fx:id="buttonAdd" layoutX="131.0" layoutY="382.0" mnemonicParsing="false" onAction="#OnAdd" prefHeight="26.0" prefWidth="74.0" text="Add" />
         <ListView fx:id="listViewTestResult" layoutX="14.0" layoutY="35.0" prefHeight="250.0" prefWidth="182.0" />
         <Button fx:id="buttonTest" layoutX="41.0" layoutY="307.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="128.0" text="Test" />
-        <Button fx:id="buttonDelete" layoutX="236.0" layoutY="341.0" mnemonicParsing="false" onAction="#OnDelete" prefHeight="26.0" prefWidth="74.0" text="Delete" />
-        <Button fx:id="buttonEdit" layoutX="236.0" layoutY="308.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="74.0" text="Edit" />
+        <Button fx:id="buttonDelete" layoutX="272.0" layoutY="330.0" mnemonicParsing="false" onAction="#OnDelete" prefHeight="26.0" prefWidth="74.0" text="Delete" />
+        <Button fx:id="buttonEdit" layoutX="131.0" layoutY="429.0" mnemonicParsing="false" onAction="#OnEdit" prefHeight="26.0" prefWidth="74.0" text="Edit" />
         <Label fx:id="labeLResult" layoutX="14.0" layoutY="14.0" prefHeight="18.0" prefWidth="182.0" text="Test Result" />
         <Label fx:id="labelList" layoutX="216.0" layoutY="15.0" prefHeight="18.0" prefWidth="342.0" text="Inventory List" />
-        <Button fx:id="buttonSave" layoutX="351.0" layoutY="308.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="51.0" text="Save" />
-        <Button fx:id="buttonCancel" layoutX="351.0" layoutY="341.0" mnemonicParsing="false" text="Cancel" />
-      <TextField fx:id="nameBox" layoutX="236.0" layoutY="416.0" prefHeight="25.0" prefWidth="109.0" />
-      <TextField fx:id="qualityBox" layoutX="482.0" layoutY="416.0" prefHeight="25.0" prefWidth="109.0" />
-      <TextField fx:id="selInBox" layoutX="359.0" layoutY="416.0" prefHeight="25.0" prefWidth="109.0" />
+      <TextField fx:id="nameBox" layoutX="217.0" layoutY="409.0" prefHeight="25.0" prefWidth="109.0" />
+      <TextField fx:id="qualityBox" layoutX="471.0" layoutY="409.0" prefHeight="25.0" prefWidth="109.0" />
+      <TextField fx:id="selInBox" layoutX="346.0" layoutY="409.0" prefHeight="25.0" prefWidth="109.0" />
     </children>
 </AnchorPane>

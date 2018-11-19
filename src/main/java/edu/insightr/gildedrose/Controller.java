@@ -124,11 +124,28 @@ public class Controller implements Initializable {
         catch(Exception e ) {
         }
 
+    }
+
+    public void OnEdit(){
+        try{
+            String selIn = selInBox.getText();
+            int selInInt = Integer.parseInt(selIn);
+            String quality = qualityBox.getText();
+            int qualityInt = Integer.parseInt(quality);
+            String name = nameBox.getText();
+            int selectedIdx = listViewItems.getSelectionModel().getSelectedIndex();
+            inventory.getItems()[selectedIdx].setName(name);
+            inventory.getItems()[selectedIdx].setQuality(qualityInt);
+            inventory.getItems()[selectedIdx].setSellIn(selInInt);
+            DisplayInventory();
+        }
+        catch(Exception e ) {
         }
 
-
-
     }
+}
+
+
 
 
 

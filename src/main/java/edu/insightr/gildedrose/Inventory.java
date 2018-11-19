@@ -24,12 +24,6 @@ public class Inventory {
                 new Item("Conjured Mana Cake", 1, 16),
                 new Item("",0,0),
                 new Item("",0,0),
-                new Item("",0,0),
-                new Item("",0,0),
-                new Item("",0,0),
-                new Item("",0,0),
-                new Item("",0,0)
-
 
         };
 
