@@ -53,7 +53,7 @@ public class Inventory {
     }
 
     public void updateQuality() {
-        // TODO (PBZ) : this method is awful
+        // TODO (PBZ) : this method is awful 
         for (int i = 0; i < items.length; i++) {
             if(items[i] != null) {
                 if (!(items[i].getName().contains("Aged")
