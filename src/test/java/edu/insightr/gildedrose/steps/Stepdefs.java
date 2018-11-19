@@ -6,7 +6,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import edu.insightr.gildedrose.Inventory;
 import edu.insightr.gildedrose.Item;
-import sun.reflect.annotation.EnumConstantNotPresentExceptionProxy;
+//import sun.reflect.annotation.EnumConstantNotPresentExceptionProxy;
 
 import javax.swing.*;
 import java.util.concurrent.ExecutionException;

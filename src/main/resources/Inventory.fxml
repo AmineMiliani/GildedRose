@@ -6,19 +6,19 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="470.0" prefWidth="605.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.insightr.gildedrose.Controller">
+<AnchorPane prefHeight="398.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.insightr.gildedrose.Controller">
     <children>
-        <ListView fx:id="listViewItems" layoutX="216.0" layoutY="35.0" prefHeight="250.0" prefWidth="342.0" />
-        <Button fx:id="buttonUpdate" layoutX="449.0" layoutY="307.0" mnemonicParsing="false" onAction="#OnUpdate" prefHeight="60.0" prefWidth="109.0" text="Update" />
-        <Button fx:id="buttonAdd" layoutX="131.0" layoutY="382.0" mnemonicParsing="false" onAction="#OnAdd" prefHeight="26.0" prefWidth="74.0" text="Add" />
-        <ListView fx:id="listViewTestResult" layoutX="14.0" layoutY="35.0" prefHeight="250.0" prefWidth="182.0" />
-        <Button fx:id="buttonTest" layoutX="41.0" layoutY="307.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="128.0" text="Test" />
-        <Button fx:id="buttonDelete" layoutX="272.0" layoutY="330.0" mnemonicParsing="false" onAction="#OnDelete" prefHeight="26.0" prefWidth="74.0" text="Delete" />
-        <Button fx:id="buttonEdit" layoutX="131.0" layoutY="429.0" mnemonicParsing="false" onAction="#OnEdit" prefHeight="26.0" prefWidth="74.0" text="Edit" />
-        <Label fx:id="labeLResult" layoutX="14.0" layoutY="14.0" prefHeight="18.0" prefWidth="182.0" text="Test Result" />
+        <ListView fx:id="listViewItems" layoutX="193.0" layoutY="35.0" prefHeight="255.0" prefWidth="365.0" />
+        <Button fx:id="buttonUpdate" layoutX="398.0" layoutY="307.0" mnemonicParsing="false" onAction="#OnUpdate" prefHeight="60.0" prefWidth="161.0" text="Update" />
+        <Button fx:id="buttonAdd" layoutX="37.0" layoutY="311.0" mnemonicParsing="false" onAction="#OnAdd" prefHeight="50.0" prefWidth="86.0" text="Add" />
+        <Button fx:id="buttonDelete" layoutX="270.0" layoutY="312.0" mnemonicParsing="false" onAction="#OnDelete" prefHeight="49.0" prefWidth="85.0" text="Delete" />
+        <Button fx:id="buttonEdit" layoutX="152.0" layoutY="311.0" mnemonicParsing="false" onAction="#OnEdit" prefHeight="50.0" prefWidth="86.0" text="Edit" />
         <Label fx:id="labelList" layoutX="216.0" layoutY="15.0" prefHeight="18.0" prefWidth="342.0" text="Inventory List" />
-      <TextField fx:id="nameBox" layoutX="217.0" layoutY="409.0" prefHeight="25.0" prefWidth="109.0" />
-      <TextField fx:id="qualityBox" layoutX="471.0" layoutY="409.0" prefHeight="25.0" prefWidth="109.0" />
-      <TextField fx:id="selInBox" layoutX="346.0" layoutY="409.0" prefHeight="25.0" prefWidth="109.0" />
+      <TextField fx:id="nameBox" layoutX="42.0" layoutY="59.0" prefHeight="25.0" prefWidth="109.0" />
+      <TextField fx:id="qualityBox" layoutX="42.0" layoutY="175.0" prefHeight="25.0" prefWidth="109.0" />
+      <TextField fx:id="selInBox" layoutX="42.0" layoutY="119.0" prefHeight="25.0" prefWidth="109.0" />
+      <Label layoutX="42.0" layoutY="35.0" text="Name" />
+      <Label layoutX="42.0" layoutY="93.0" text="SellIn" />
+      <Label layoutX="42.0" layoutY="154.0" text="Quality" />
     </children>
 </AnchorPane>
