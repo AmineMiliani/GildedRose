@@ -8,9 +8,11 @@ import edu.insightr.gildedrose.Inventory;
 import edu.insightr.gildedrose.Item;
 import sun.reflect.annotation.EnumConstantNotPresentExceptionProxy;
 
+import javax.swing.*;
 import java.util.concurrent.ExecutionException;
 
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 public class Stepdefs {
@@ -53,6 +55,60 @@ public class Stepdefs {
         }
     }
 
+    @When("^I update the inventory$")
+    public void iUpdateTheInventory() throws Throwable {
+        try{
+            inventory.updateQuality();
+        }
+        catch(Exception e){
+            throw new Throwable(e.getMessage());
+        }
+    }
+
+    @When("^I add a new item$")
+    public void iAddANewItem() throws Throwable {
+        try {
+            inventory.Add("testNewItem", 5, 5);
+        } catch (Exception e) {
+            throw new Throwable(e.getMessage());
+        }
+    }
+    @When("^I delete an item$")
+    public void iDeleteAnItem() throws Throwable {
+        try {
+            inventory.Delete(6);
+        } catch (Exception e) {
+            throw new Throwable(e.getMessage());
+        }
+    }
+
+    @When("^I edit the name of the item with identifier (\\d+) to be (\\s+)$")
+    public void iEditTheNameOfAnItemToBe(int id, String name) throws Throwable {
+        try {
+            items[id].setName(name);
+        } catch (Exception e) {
+            throw new Throwable(e.getMessage());
+        }
+    }
+
+    @When("^I edit the sell in value of the item with identifier (\\d+) to be (\\d+)$")
+    public void iEditTheSellinOfAnItemToBe(int id, int sellin) throws Throwable {
+        try {
+            items[id].setSellIn(sellin);
+        } catch (Exception e) {
+            throw new Throwable(e.getMessage());
+        }
+    }
+
+    @When("^I edit the quality of the item with identifier (\\d+) to be (\\d+)$")
+    public void iEditTheQualityOfAnItemToBe(int id, int quality) throws Throwable {
+        try {
+            items[id].setQuality(quality);
+        } catch (Exception e) {
+            throw new Throwable(e.getMessage());
+        }
+    }
+
     @Then("^the quality of the conjured item is (\\d+)$")
     public void theQualityOfTheConjuredIs(int conjuredQuality) throws Throwable {
         try {
@@ -80,20 +136,21 @@ public class Stepdefs {
         }
     }
 
-    @When("^I update the inventory$")
-    public void iUpdateTheInventory() throws Throwable {
-        try{
-            inventory.updateQuality();
-        }
-        catch(Exception e){
+    @Then("^the item was deleted from the inventory$")
+    public void theItemWasDeleted() throws Throwable {
+        try {
+            assertEquals(items[6], null);
+        } catch (Exception e) {
             throw new Throwable(e.getMessage());
         }
     }
 
-    @When("^I add a new item$")
-    public void iAddANewItem() throws Throwable {
+    @Then("^the item (\\d+) has name: (\\s+), sellin: (\\d+), quality: (\\d+)$")
+    public void theItemHasNameSellinQuality(int id, String name, int sellin, int quality) throws Throwable {
         try {
-            inventory.Add("testNewItem", 5, 5);
+            assertThat(items[id].getName(), is(name));
+            assertThat(items[id].getSellIn(), is(sellin));
+            assertThat(items[id].getQuality(), is(quality));
         } catch (Exception e) {
             throw new Throwable(e.getMessage());
         }
