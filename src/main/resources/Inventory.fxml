@@ -20,5 +20,6 @@
       <Label layoutX="42.0" layoutY="35.0" text="Name" />
       <Label layoutX="42.0" layoutY="93.0" text="SellIn" />
       <Label layoutX="42.0" layoutY="154.0" text="Quality" />
+      <Button fx:id="buttonFileChooser" layoutX="41.0" layoutY="235.0" mnemonicParsing="false" onAction="#OnFileChooser" text="Charger un fichier" />
     </children>
 </AnchorPane>

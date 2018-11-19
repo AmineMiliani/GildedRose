@@ -8,6 +8,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+
+import java.awt.event.ActionEvent;
+import java.io.File;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -15,6 +18,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 
 import javax.xml.soap.Text;
 
@@ -65,8 +69,7 @@ public class Controller implements Initializable {
     private TextField qualityBox;
 
     @FXML
-    private Button buttonOk;
-
+    private Button buttonFileChooser;
 
 
 
@@ -142,6 +145,12 @@ public class Controller implements Initializable {
         catch(Exception e ) {
         }
 
+    }
+    @FXML
+    public void OnFileChooser() {
+        FileChooser fc = new FileChooser();
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Json Files", "*.json"));
+        File f = fc.showOpenDialog(null);
     }
 }
 
