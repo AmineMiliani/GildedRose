@@ -2,6 +2,8 @@ package edu.insightr.gildedrose;
 
 public class Inventory {
 
+    //TODO (PBZ) : the code is not indented
+
     private Item[] items ;
 
 
@@ -51,6 +53,7 @@ public class Inventory {
     }
 
     public void updateQuality() {
+        // TODO (PBZ) : this method is awful
         for (int i = 0; i < items.length; i++) {
             if(items[i] != null) {
                 if (!(items[i].getName().contains("Aged")
@@ -124,6 +127,7 @@ public class Inventory {
 
     public void Add (String name,int selIn,int quality)
     {
+        // TODO (PBZ) : don't let warnings into your code
         Item[] newitems = new Item[items.length +1];
         for(int i = 0; i < items.length; i++){
             newitems[i] = items[i];

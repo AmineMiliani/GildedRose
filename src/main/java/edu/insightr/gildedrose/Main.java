@@ -15,6 +15,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage){
         try {
+            // TODO (PBZ) : using pixel size into your fxml is not a good idea (no responsive, no decoration isolation)
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Inventory.fxml"));
             primaryStage.setTitle("Main Window");
             primaryStage.setScene(new Scene(root, 650, 500));

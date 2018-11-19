@@ -21,6 +21,7 @@ public class Stepdefs {
     //private Item vest;
     private Item conjured;
     private Item normal;
+    // TODO (PBZ) : unused code
     private Item newItem;
 
     @Given("^I have a new inventory with a conjured item$")

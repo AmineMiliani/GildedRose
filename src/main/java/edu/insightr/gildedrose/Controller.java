@@ -84,6 +84,7 @@ public class Controller implements Initializable {
         ObservableList<Item> itemList = FXCollections.observableArrayList(inventory.getItems());
         ObservableList<Item> newitemList = FXCollections.observableArrayList(inventory.getItems());
         newitemList.remove(0, newitemList.size());
+        // TODO (PBZ) : don't let warnings into your code
         for (int i = 0; i  < itemList.size(); i++){
 
             if(itemList.get(i) != null)
@@ -125,6 +126,7 @@ public class Controller implements Initializable {
             DisplayInventory();
         }
         catch(Exception e ) {
+            // TODO (PBZ) : never catch an exception and do nothing. It would be better to let the code crash !
         }
 
     }
@@ -143,6 +145,8 @@ public class Controller implements Initializable {
             DisplayInventory();
         }
         catch(Exception e ) {
+            // TODO (PBZ) : never catch an exception and do nothing. It would be better to let the code crash !
+
         }
 
     }
