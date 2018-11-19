@@ -3,8 +3,6 @@ package edu.insightr.gildedrose;
 public class Inventory {
 
     private Item[] items ;
-    int compteur = 6;
-
 
 
     public Inventory(Item[] items) {
@@ -128,8 +126,12 @@ public class Inventory {
 
     public void Add (String name,int selIn,int quality)
     {
-        items[compteur]= new Item (name,selIn,quality);
-        compteur++;
+        Item[] newitems = new Item[items.length +1];
+        for(int i = 0; i < items.length; i++){
+            newitems[i] = items[i];
+        }
+        newitems[items.length]= new Item (name,selIn,quality);
+        items = newitems;
     }
 
 
