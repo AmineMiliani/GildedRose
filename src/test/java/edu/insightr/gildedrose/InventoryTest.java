@@ -28,4 +28,9 @@ public class InventoryTest {
         assertEquals(10, manaCake.getQuality());
         assertEquals(-1,manaCake.getSellIn());
     }
+
+    @Test
+    void SellinTest(){
+
+    }
 }
