@@ -1,6 +1,6 @@
 package edu.insightr.gildedrose.steps;
-import cucumber.api.PendingException;
-import cucumber.api.java.en.And;
+//import cucumber.api.PendingException;
+//import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -12,17 +12,13 @@ import javax.swing.*;
 import java.util.concurrent.ExecutionException;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
-public class Stepdefs {
+public class Steps {
     private Inventory inventory;
     private Item[] items;
-    //private Item vest;
     private Item conjured;
     private Item normal;
-    // TODO (PBZ) : unused code
-    private Item newItem;
 
     @Given("^I have a new inventory with a conjured item$")
     public void iHaveANewInventoryWithConjuredItem() throws Throwable {
@@ -140,7 +136,7 @@ public class Stepdefs {
     @Then("^the item was deleted from the inventory$")
     public void theItemWasDeleted() throws Throwable {
         try {
-            assertEquals(items[6], null);
+            assertNull(items[6]);
         } catch (Exception e) {
             throw new Throwable(e.getMessage());
         }

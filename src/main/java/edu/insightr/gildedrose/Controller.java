@@ -1,6 +1,5 @@
 package edu.insightr.gildedrose;
 
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,19 +7,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-
-import java.awt.event.ActionEvent;
+import org.apache.commons.io.IOUtils;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.File;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
-
-import javax.xml.soap.Text;
+import org.json.JSONObject;
 
 
 public class Controller implements Initializable {
@@ -80,20 +76,18 @@ public class Controller implements Initializable {
 
     }
 
-    public void DisplayInventory() {
+    private void DisplayInventory() {
         ObservableList<Item> itemList = FXCollections.observableArrayList(inventory.getItems());
-        ObservableList<Item> newitemList = FXCollections.observableArrayList(inventory.getItems());
-        newitemList.remove(0, newitemList.size());
-        // TODO (PBZ) : don't let warnings into your code
-        for (int i = 0; i  < itemList.size(); i++){
+        ObservableList<Item> newItemList = FXCollections.observableArrayList(inventory.getItems());
+        newItemList.remove(0, newItemList.size());
+        for (Item anItemList : itemList) {
 
-            if(itemList.get(i) != null)
-            {
-                newitemList.add(itemList.get(i));
+            if (anItemList != null) {
+                newItemList.add(anItemList);
             }
         }
 
-        listViewItems.setItems(newitemList);
+        listViewItems.setItems(newItemList);
     }
 
     public  void OnUpdate()
@@ -113,7 +107,7 @@ public class Controller implements Initializable {
     }
 
 
-    public void OnAdd ()
+    public void OnAdd() throws Throwable
     {
         try{
         String selIn = selInBox.getText();
@@ -126,12 +120,12 @@ public class Controller implements Initializable {
             DisplayInventory();
         }
         catch(Exception e ) {
-            // TODO (PBZ) : never catch an exception and do nothing. It would be better to let the code crash !
+            throw new Throwable(e.getMessage());
         }
 
     }
 
-    public void OnEdit(){
+    public void OnEdit() throws Throwable{
         try{
             String selIn = selInBox.getText();
             int selInInt = Integer.parseInt(selIn);
@@ -145,18 +139,41 @@ public class Controller implements Initializable {
             DisplayInventory();
         }
         catch(Exception e ) {
-            // TODO (PBZ) : never catch an exception and do nothing. It would be better to let the code crash !
+            throw new Throwable(e.getMessage());
 
         }
 
     }
     @FXML
-    public void OnFileChooser() {
+    public void OnFileChooser() throws Throwable {
         FileChooser fc = new FileChooser();
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Json Files", "*.json"));
         File f = fc.showOpenDialog(null);
-    }
-}
+        if (f.exists()){
+            try{
+                InputStream is = new FileInputStream(f);
+                String jsonTxt = IOUtils.toString(is,"UTF-8");
+                JSONObject json = new JSONObject(jsonTxt);
+                Item[] items = new Item[json.length()];
+                for(int i = 0; i < json.length(); i++)
+                {
+                    String name = json.getString("name");
+                    int sellIn = json.getInt("sellIn");
+                    int quality = json.getInt("quality");
+                    Item item = new Item(name,sellIn,quality);
+                    items[i] = item;
+                }
+                inventory.setItems(items);
+                DisplayInventory();
+            }
+            catch(Exception e)
+            {
+                throw new Throwable(e.getMessage());
+
+            }
+
+        }
+}}
 
 
 

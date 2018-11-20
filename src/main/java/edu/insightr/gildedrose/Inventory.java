@@ -4,7 +4,7 @@ public class Inventory {
 
     //TODO (PBZ) : the code is not indented
 
-    private Item[] items ;
+    private Item[] items;
 
 
     public Inventory(Item[] items) {
@@ -26,24 +26,18 @@ public class Inventory {
         };
 
 
-
-
-
-
     }
-    public Item[] getItems()
-    {
+
+    public Item[] getItems() {
         return items;
     }
 
-    public void setItems(Item[] items )
-    {
-        this.items=items;
+    void setItems(Item[] items) {
+        this.items = items;
     }
 
 
-
-    public void printInventory() {
+    private void printInventory() {
         System.out.println("***************");
         for (Item item : items) {
             System.out.println(item);
@@ -54,64 +48,64 @@ public class Inventory {
 
     public void updateQuality() {
         // TODO (PBZ) : this method is awful 
-        for (int i = 0; i < items.length; i++) {
-            if(items[i] != null) {
-                if (!(items[i].getName().contains("Aged")
-                        && items[i].getName().contains("concert"))) {
-                    if (items[i].getQuality() > 0) {
-                        if (!items[i].getName().contains("Legendary")) {
+        for (Item item : items) {
+            if (item != null) {
+                if (!(item.getName().contains("Aged")
+                        && item.getName().contains("concert"))) {
+                    if (item.getQuality() > 0) {
+                        if (!item.getName().contains("Legendary")) {
                             //items[i].setQuality(items[i].getQuality() - 1);
 
-                            if (!items[i].getName().contains("Conjured")) {
-                                items[i].setQuality(items[i].getQuality() - 2);
+                            if (!item.getName().contains("Conjured")) {
+                                item.setQuality(item.getQuality() - 2);
                             } else {
-                                items[i].setQuality(items[i].getQuality() - 1);
+                                item.setQuality(item.getQuality() - 1);
                             }
                         }
                     }
                 } else {
-                    if (items[i].getQuality() < 50) {
-                        items[i].setQuality(items[i].getQuality() + 1);
+                    if (item.getQuality() < 50) {
+                        item.setQuality(item.getQuality() + 1);
 
-                        if (!items[i].getName().contains("concert")) {
-                            if (items[i].getSellIn() < 11) {
-                                if (items[i].getQuality() < 50) {
-                                    items[i].setQuality(items[i].getQuality() + 1);
+                        if (!item.getName().contains("concert")) {
+                            if (item.getSellIn() < 11) {
+                                if (item.getQuality() < 50) {
+                                    item.setQuality(item.getQuality() + 1);
                                 }
                             }
 
-                            if (items[i].getSellIn() < 6) {
-                                if (items[i].getQuality() < 50) {
-                                    items[i].setQuality(items[i].getQuality() + 1);
+                            if (item.getSellIn() < 6) {
+                                if (item.getQuality() < 50) {
+                                    item.setQuality(item.getQuality() + 1);
                                 }
                             }
                         }
                     }
                 }
 
-                if (!items[i].getName().contains("Legendary")) {
-                    items[i].setSellIn(items[i].getSellIn() - 1);
+                if (!item.getName().contains("Legendary")) {
+                    item.setSellIn(item.getSellIn() - 1);
                 }
 
-                if (items[i].getSellIn() < 0) {
-                    if (!items[i].getName().contains("Aged")) {
-                        if (!items[i].getName().contains("concert")) {
-                            if (items[i].getQuality() > 0) {
-                                if (!items[i].getName().contains("Legendary")) {
+                if (item.getSellIn() < 0) {
+                    if (!item.getName().contains("Aged")) {
+                        if (!item.getName().contains("concert")) {
+                            if (item.getQuality() > 0) {
+                                if (!item.getName().contains("Legendary")) {
 
-                                    if (items[i].getName().contains("Conjured")) {
-                                        items[i].setQuality(items[i].getQuality() - 2);
+                                    if (item.getName().contains("Conjured")) {
+                                        item.setQuality(item.getQuality() - 2);
                                     } else {
-                                        items[i].setQuality(items[i].getQuality() - 1);
+                                        item.setQuality(item.getQuality() - 1);
                                     }
                                 }
                             }
                         } else {
-                            items[i].setQuality(items[i].getQuality() - items[i].getQuality());
+                            item.setQuality(0);
                         }
                     } else {
-                        if (items[i].getQuality() < 50) {
-                            items[i].setQuality(items[i].getQuality() + 1);
+                        if (item.getQuality() < 50) {
+                            item.setQuality(item.getQuality() + 1);
                         }
                     }
                 }
@@ -120,20 +114,15 @@ public class Inventory {
     }
 
 
-    public void Delete (int selectedIdx)
-    {
-       items[selectedIdx]= null;
+    public void Delete(int selectedIdx) {
+        items[selectedIdx] = null;
     }
 
-    public void Add (String name,int selIn,int quality)
-    {
-        // TODO (PBZ) : don't let warnings into your code
-        Item[] newitems = new Item[items.length +1];
-        for(int i = 0; i < items.length; i++){
-            newitems[i] = items[i];
-        }
-        newitems[items.length]= new Item (name,selIn,quality);
-        items = newitems;
+    public void Add(String name, int selIn, int quality) {
+        Item[] newItems = new Item[items.length + 1];
+        System.arraycopy(items, 0, newItems, 0, items.length);
+        newItems[items.length] = new Item(name, selIn, quality);
+        items = newItems;
     }
 
 
