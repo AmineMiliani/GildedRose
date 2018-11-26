@@ -47,66 +47,38 @@ public class Inventory {
     }
 
     public void updateQuality() {
-        // TODO (PBZ) : this method is awful 
         for (Item item : items) {
             if (item != null) {
-                if (!(item.getName().contains("Aged")
-                        && item.getName().contains("concert"))) {
-                    if (item.getQuality() > 0) {
-                        if (!item.getName().contains("Legendary")) {
-                            //items[i].setQuality(items[i].getQuality() - 1);
-
-                            if (!item.getName().contains("Conjured")) {
-                                item.setQuality(item.getQuality() - 2);
-                            } else {
-                                item.setQuality(item.getQuality() - 1);
-                            }
-                        }
-                    }
-                } else {
-                    if (item.getQuality() < 50) {
-                        item.setQuality(item.getQuality() + 1);
-
-                        if (!item.getName().contains("concert")) {
-                            if (item.getSellIn() < 11) {
-                                if (item.getQuality() < 50) {
-                                    item.setQuality(item.getQuality() + 1);
-                                }
-                            }
-
-                            if (item.getSellIn() < 6) {
-                                if (item.getQuality() < 50) {
-                                    item.setQuality(item.getQuality() + 1);
-                                }
-                            }
-                        }
-                    }
-                }
-
                 if (!item.getName().contains("Legendary")) {
-                    item.setSellIn(item.getSellIn() - 1);
-                }
+                    int qualityDifference = -1, sellinDifference = -1;
 
-                if (item.getSellIn() < 0) {
-                    if (!item.getName().contains("Aged")) {
-                        if (!item.getName().contains("concert")) {
-                            if (item.getQuality() > 0) {
-                                if (!item.getName().contains("Legendary")) {
-
-                                    if (item.getName().contains("Conjured")) {
-                                        item.setQuality(item.getQuality() - 2);
-                                    } else {
-                                        item.setQuality(item.getQuality() - 1);
-                                    }
-                                }
-                            }
-                        } else {
+                    if (item.getSellIn() < 0) {
+                        qualityDifference *= 2;
+                    }
+                    if (item.getName().contains("Conjured")) {
+                        qualityDifference *= 2;
+                    }
+                    if (item.getName().contains("Aged")) {
+                        qualityDifference = 1;
+                    }
+                    if (item.getName().contains("concert")) {
+                        if (item.getSellIn() < 0) {
                             item.setQuality(0);
+                        } else if (item.getSellIn() <= 5) {
+                            qualityDifference = 3;
+                        } else if (item.getSellIn() <= 10) {
+                            qualityDifference = 2;
+                        } else {
+                            qualityDifference = 1;
                         }
-                    } else {
-                        if (item.getQuality() < 50) {
-                            item.setQuality(item.getQuality() + 1);
-                        }
+                    }
+
+                    item.setQuality(item.getQuality() + qualityDifference);
+                    item.setSellIn(item.getSellIn() + sellinDifference);
+                    if (item.getQuality() > 50) {
+                        item.setQuality(50);
+                    } else if (item.getQuality() < 0) {
+                        item.setQuality(0);
                     }
                 }
             }
