@@ -1,19 +1,23 @@
 package edu.insightr.gildedrose;
 
-public class Item {
+import java.io.Serializable;
+
+public class Item implements Serializable {
 
     private String name;
     private int sellIn;
 
     private int quality;
 
-    public Item(String name, int sellIn, int quality) {
+    public Item(String name, int sellIn, int quality){
         super();
         this.name = name;
         this.sellIn = sellIn;
         this.quality = quality;
     }
+    public Item(){
 
+    }
     public String getName() {
         return name;
     }

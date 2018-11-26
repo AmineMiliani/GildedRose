@@ -1,5 +1,5 @@
-{
-  "inventory" : [
+
+[
     {
       "name":"+15 Dexterity Vest",
       "sellIn":9,
@@ -118,5 +118,4 @@
       "quality":29
     }
 
-  ]
-}
+]

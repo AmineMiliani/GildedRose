@@ -1,5 +1,11 @@
 package edu.insightr.gildedrose;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import gherkin.deps.com.google.gson.JsonArray;
+import gherkin.deps.com.google.gson.JsonElement;
+import gherkin.deps.com.google.gson.JsonObject;
+import gherkin.deps.com.google.gson.JsonParser;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -7,17 +13,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import org.apache.commons.io.IOUtils;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.File;
+import java.io.*;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
-
+import java.util.List;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
+import org.json.JSONArray;
 import org.json.JSONObject;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 public class Controller implements Initializable {
 
@@ -68,9 +74,8 @@ public class Controller implements Initializable {
     private Button buttonFileChooser;
 
 
-
     @Override
-    public void initialize(URL arg0, ResourceBundle arg1){
+    public void initialize(URL arg0, ResourceBundle arg1) {
         inventory = new Inventory();
         DisplayInventory();
 
@@ -90,16 +95,13 @@ public class Controller implements Initializable {
         listViewItems.setItems(newItemList);
     }
 
-    public  void OnUpdate()
-    {
+    public void OnUpdate() {
         inventory.updateQuality();
         DisplayInventory();
     }
 
 
-
-    public  void OnDelete()
-    {
+    public void OnDelete() {
         int selectedIdx = listViewItems.getSelectionModel().getSelectedIndex();
         inventory.Delete(selectedIdx);
         DisplayInventory();
@@ -107,26 +109,24 @@ public class Controller implements Initializable {
     }
 
 
-    public void OnAdd() throws Throwable
-    {
-        try{
-        String selIn = selInBox.getText();
-        int selInInt = Integer.parseInt(selIn);
-        String quality = qualityBox.getText();
-        int qualityInt = Integer.parseInt(quality);
-        String name = nameBox.getText();
+    public void OnAdd() throws Throwable {
+        try {
+            String selIn = selInBox.getText();
+            int selInInt = Integer.parseInt(selIn);
+            String quality = qualityBox.getText();
+            int qualityInt = Integer.parseInt(quality);
+            String name = nameBox.getText();
 
             inventory.Add(name, selInInt, qualityInt);
             DisplayInventory();
-        }
-        catch(Exception e ) {
+        } catch (Exception e) {
             throw new Throwable(e.getMessage());
         }
 
     }
 
-    public void OnEdit() throws Throwable{
-        try{
+    public void OnEdit() throws Throwable {
+        try {
             String selIn = selInBox.getText();
             int selInInt = Integer.parseInt(selIn);
             String quality = qualityBox.getText();
@@ -137,43 +137,50 @@ public class Controller implements Initializable {
             inventory.getItems()[selectedIdx].setQuality(qualityInt);
             inventory.getItems()[selectedIdx].setSellIn(selInInt);
             DisplayInventory();
-        }
-        catch(Exception e ) {
+        } catch (Exception e) {
             throw new Throwable(e.getMessage());
 
         }
 
     }
+
     @FXML
     public void OnFileChooser() throws Throwable {
         FileChooser fc = new FileChooser();
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Json Files", "*.json"));
         File f = fc.showOpenDialog(null);
-        if (f.exists()){
-            try{
-                InputStream is = new FileInputStream(f);
-                String jsonTxt = IOUtils.toString(is,"UTF-8");
-                JSONObject json = new JSONObject(jsonTxt);
-                Item[] items = new Item[json.length()];
-                for(int i = 0; i < json.length(); i++)
+        if (f.exists()) {
+            try {
+                InputStream is = getClass().getClassLoader().getResourceAsStream(f.getName());
+                Reader reader = new InputStreamReader(is);
+                JsonArray array = new JsonParser().parse(reader).getAsJsonArray();
+                Item [] items = new Item[inventory.getItems().length + array.size()];
+                ArrayList<Item> yourArray = new Gson().fromJson(array.toString(), new TypeToken<List<Item>>(){}.getType());
+                int j = 0;
+                for(int i = 0;  i < yourArray.size() + items.length; i++)
                 {
-                    String name = json.getString("name");
-                    int sellIn = json.getInt("sellIn");
-                    int quality = json.getInt("quality");
-                    Item item = new Item(name,sellIn,quality);
-                    items[i] = item;
+                    if(i <inventory.getItems().length)
+                    {
+                        items[i] = inventory.getItems()[i];
+                    }
+                    else if(j < yourArray.size())
+                    {
+                        items[i] = yourArray.get(j);
+                        j++;
+                    }
                 }
                 inventory.setItems(items);
                 DisplayInventory();
             }
-            catch(Exception e)
-            {
+            catch (Exception e) {
                 throw new Throwable(e.getMessage());
 
             }
-
         }
-}}
+    }
+
+}
+
 
 
 
