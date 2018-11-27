@@ -61,7 +61,7 @@ public class Steps {
             throw new Throwable(e.getMessage());
         }
     }
-
+/*
     @When("^I add a new item$")
     public void iAddANewItem() throws Throwable {
         try {
@@ -69,7 +69,7 @@ public class Steps {
         } catch (Exception e) {
             throw new Throwable(e.getMessage());
         }
-    }
+    }*/
     @When("^I delete an item$")
     public void iDeleteAnItem() throws Throwable {
         try {

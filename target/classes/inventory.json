@@ -3,119 +3,139 @@
     {
       "name":"+15 Dexterity Vest",
       "sellIn":9,
-      "quality":18
+      "quality":18,
+      "creationDate":"06-10-2018"
     },
     {
       "name":"+35 Speed Boots",
       "sellIn":25,
-      "quality":29
+      "quality":29,
+      "creationDate":"06-10-2018"
     },
     {
       "name":"+20 Attack Sword",
       "sellIn":16,
-      "quality":22
+      "quality":22,
+      "creationDate":"09-10-2018"
     },
 
     {
       "name":"+40 Magic Power Hat",
       "sellIn":27,
-      "quality":31
+      "quality":31,
+      "creationDate":"15-10-2018"
     },
 
     {
       "name":"+30 Defense Armor",
       "sellIn":20,
-      "quality":33
+      "quality":33,
+      "creationDate":"15-10-2018"
     },
 
     {
       "name":"+23 Defense Shield",
       "sellIn":17,
-      "quality":23
+      "quality":23,
+      "creationDate":"15-10-2018"
     },
 
     {
       "name":"+36 Healing Robe",
       "sellIn":21,
-      "quality":24
+      "quality":24,
+      "creationDate":"24-10-2018"
     },
 
     {
       "name":"Legendary Antonidas Staff",
       "sellIn":24,
-      "quality":60
+      "quality":60,
+      "creationDate":"24-10-2018"
     },
 
     {
       "name":"Legendary Alexstraza's Feng",
       "sellIn":25,
-      "quality":80
+      "quality":80,
+      "creationDate":"28-10-2018"
     },
 
     {
       "name":"Legendary Sohothin",
       "sellIn":32,
-      "quality":80
+      "quality":80,
+      "creationDate":"04-11-2018"
     },
 
     {
       "name":"Legendary Caladbolg",
       "sellIn":28,
-      "quality":80
+      "quality":80,
+      "creationDate":"04-11-2018"
     },
 
     {
       "name":"Aged Vodka",
       "sellIn":8,
-      "quality":6
+      "quality":6,
+      "creationDate":"07-11-2018"
     },
 
     {
       "name":"Aged Whisky",
       "sellIn":12,
-      "quality":11
+      "quality":11,
+      "creationDate":"08-11-2018"
     },
 
     {
       "name":"Conjured XP Potion",
       "sellIn":14,
-      "quality":13
+      "quality":13,
+      "creationDate":"18-11-2018"
     },
 
     {
       "name":"Conjured Health Potion",
       "sellIn":22,
-      "quality":18
+      "quality":18,
+      "creationDate":"18-11-2018"
     },
 
     {
       "name":"Conjured Shovel",
       "sellIn":16,
-      "quality":29
+      "quality":29,
+      "creationDate":"22-11-2018"
     },
 
     {
       "name":"Conjured Axe",
       "sellIn":25,
-      "quality":5
+      "quality":5,
+      "creationDate":"27-11-2018"
     },
 
     {
       "name":"Aged Wine",
       "sellIn":25,
-      "quality":19
+      "quality":19,
+      "creationDate":"29-11-2018"
     },
 
     {
       "name":"Aged Skooma",
       "sellIn":15,
-      "quality":4
+      "quality":4,
+      "creationDate":"29-11-2018"
     },
 
     {
       "name":"Legendary Warglaive of Azzinoth",
       "sellIn":25,
-      "quality":29
+      "quality":29,
+      "creationDate":"02-12-2018"
     }
 
 ]
