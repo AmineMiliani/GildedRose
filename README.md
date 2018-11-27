@@ -54,3 +54,4 @@ Theo Isambourg
 Amine Miliani
 Adrien Kerisit
 Nathan Immacolato
+Charles-Adrien Lamine
