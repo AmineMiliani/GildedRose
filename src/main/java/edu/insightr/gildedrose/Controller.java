@@ -101,8 +101,12 @@ public class Controller implements Initializable {
         pcItems.setData(pieChartData);
     }
 
-    private void DisplayInventory() {
+    private void DisplayInventory()
+    {
+
         ObservableList<Item> itemList = FXCollections.observableArrayList(inventory.getItems());
+
+        //protection to delete the null items (normally already deleted in the function delete of Inventory)
         ObservableList<Item> newItemList = FXCollections.observableArrayList(inventory.getItems());
         newItemList.remove(0, newItemList.size());
         for (Item anItemList : itemList) {
@@ -113,12 +117,12 @@ public class Controller implements Initializable {
         }
 
         listViewItems.setItems(newItemList);
+        LoadPieChart();
     }
 
     public void OnUpdate() {
         inventory.updateQuality();
         DisplayInventory();
-        LoadPieChart();
     }
 
 
