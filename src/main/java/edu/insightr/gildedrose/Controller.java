@@ -76,30 +76,40 @@ public class Controller implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         inventory = new Inventory();
         DisplayInventory();
-        LoadPieChart();
-
+        ObservableList<PieChart.Data> pieChartData = LoadPieChart();
+        ApplyPieChartColors(pieChartData, "green", "red", "blue", "orange");
     }
 
-    public int Count(String groupName)
+    private int Count(String groupName)
     {
         Item [] items = inventory.getItems();
         int count = 0;
-        for(int i =0; i < items.length; i++){
-         if(items[i].getName().contains(groupName))
-         {
-             count++;
-         }
+        for (Item item : items) {
+            if (item.getName().contains(groupName)) {
+                count++;
+            }
         }
         return count;
     }
 
-    public void LoadPieChart(){
-    int countLegendary = Count("Legendary");
-    int countConjured = Count("Conjured");
-    int countAged = Count("Aged");
-    int countNormal = inventory.getItems().length  - (countAged + countConjured + countLegendary);
-    ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(new PieChart.Data("Legendary",countLegendary), new PieChart.Data("Conjured", countConjured), new PieChart.Data("Aged", countAged), new PieChart.Data("Normal", countNormal));
-    pcItems.setData(pieChartData);
+    private ObservableList<PieChart.Data> LoadPieChart(){
+        int countLegendary = Count("Legendary");
+        int countConjured = Count("Conjured");
+        int countAged = Count("Aged");
+        int countNormal = inventory.getItems().length  - (countAged + countConjured + countLegendary);
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(new PieChart.Data("Legendary",countLegendary), new PieChart.Data("Conjured", countConjured), new PieChart.Data("Aged", countAged), new PieChart.Data("Normal", countNormal));
+        pcItems.setData(pieChartData);
+        return pieChartData;
+    }
+
+    private void ApplyPieChartColors(ObservableList<PieChart.Data> pieChartData, String... pieColors) {
+        int i = 1;
+        for (PieChart.Data data : pieChartData) {
+            data.getNode().setStyle(
+                "-fx-pie-color: " + pieColors[i % pieColors.length] + ";"
+            );
+            i++;
+        }
     }
 
     private void DisplayInventory() {
@@ -192,8 +202,8 @@ public class Controller implements Initializable {
                 }
                 inventory.setItems(items);
                 DisplayInventory();
-                LoadPieChart();
-            }
+                ObservableList<PieChart.Data> pieChartData = LoadPieChart();
+                ApplyPieChartColors(pieChartData, "green", "red", "blue", "orange");            }
             catch (Exception e) {
                 throw new Throwable(e.getMessage());
 
