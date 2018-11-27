@@ -3,8 +3,6 @@ package edu.insightr.gildedrose;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import gherkin.deps.com.google.gson.JsonArray;
-import gherkin.deps.com.google.gson.JsonElement;
-import gherkin.deps.com.google.gson.JsonObject;
 import gherkin.deps.com.google.gson.JsonParser;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,10 +18,7 @@ import java.util.ResourceBundle;
 import java.util.List;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.core.type.TypeReference;
+import javafx.scene.chart.*;
 
 public class Controller implements Initializable {
 
@@ -73,12 +68,38 @@ public class Controller implements Initializable {
     @FXML
     private Button buttonFileChooser;
 
+    @FXML
+    private PieChart pcItems;
+
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         inventory = new Inventory();
         DisplayInventory();
+        LoadPieChart();
 
+    }
+
+    public int Count(String groupName)
+    {
+        Item [] items = inventory.getItems();
+        int count = 0;
+        for(int i =0; i < items.length; i++){
+         if(items[i].getName().contains(groupName))
+         {
+             count++;
+         }
+        }
+        return count;
+    }
+
+    public void LoadPieChart(){
+    int countLegendary = Count("Legendary");
+    int countConjured = Count("Conjured");
+    int countAged = Count("Aged");
+    int countNormal = inventory.getItems().length  - (countAged + countConjured + countLegendary);
+    ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(new PieChart.Data("Legendary",countLegendary), new PieChart.Data("Conjured", countConjured), new PieChart.Data("Aged", countAged), new PieChart.Data("Normal", countNormal));
+    pcItems.setData(pieChartData);
     }
 
     private void DisplayInventory() {
@@ -171,6 +192,7 @@ public class Controller implements Initializable {
                 }
                 inventory.setItems(items);
                 DisplayInventory();
+                LoadPieChart();
             }
             catch (Exception e) {
                 throw new Throwable(e.getMessage());
