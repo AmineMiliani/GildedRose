@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import java.io.*;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.List;
@@ -117,6 +118,7 @@ public class Controller implements Initializable {
     public void OnUpdate() {
         inventory.updateQuality();
         DisplayInventory();
+        LoadPieChart();
     }
 
 
@@ -135,8 +137,8 @@ public class Controller implements Initializable {
             String quality = qualityBox.getText();
             int qualityInt = Integer.parseInt(quality);
             String name = nameBox.getText();
-
-            inventory.Add(name, selInInt, qualityInt);
+            String date = LocalDate.now().toString();
+            inventory.Add(name, selInInt, qualityInt, date);
             DisplayInventory();
         } catch (Exception e) {
             throw new Throwable(e.getMessage());
