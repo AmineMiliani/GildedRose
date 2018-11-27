@@ -103,7 +103,6 @@ public class Controller implements Initializable {
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(new PieChart.Data("Legendary",countLegendary), new PieChart.Data("Conjured", countConjured), new PieChart.Data("Aged", countAged), new PieChart.Data("Normal", countNormal));
         pcItems.setData(pieChartData);
     }
-
     private void LoadBarChart()
     {
         class SellInHist{
@@ -148,10 +147,6 @@ public class Controller implements Initializable {
             }
         }
         XYChart.Series<String, Number> barChartData = new XYChart.Series<>();
-        serie.setName("Number of items by sellIn");
-        for (SellInHist element: liste)
-            serie.getData().add(new XYChart.Data<>(element.getSellIn()), element.getCount());
-        bcSellIn.setData(serie);
     }
 
     private void DisplayInventory()
