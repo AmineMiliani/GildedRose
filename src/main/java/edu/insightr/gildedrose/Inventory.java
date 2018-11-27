@@ -91,6 +91,7 @@ public class Inventory {
         items[selectedIdx] = null;
 
         Item[] newItemList = new Item[items.length - 1];
+
         int compteur = 0;
         for (int i =0; i<items.length; i++)
         {
@@ -100,6 +101,7 @@ public class Inventory {
                 compteur=compteur+1;
             }
         }
+
         items = newItemList;
 
     }
