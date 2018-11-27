@@ -76,8 +76,7 @@ public class Controller implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         inventory = new Inventory();
         DisplayInventory();
-        ObservableList<PieChart.Data> pieChartData = LoadPieChart();
-        ApplyPieChartColors(pieChartData, "green", "red", "blue", "orange");
+        LoadPieChart();
     }
 
     private int Count(String groupName)
@@ -92,24 +91,13 @@ public class Controller implements Initializable {
         return count;
     }
 
-    private ObservableList<PieChart.Data> LoadPieChart(){
+    private void LoadPieChart(){
         int countLegendary = Count("Legendary");
         int countConjured = Count("Conjured");
         int countAged = Count("Aged");
         int countNormal = inventory.getItems().length  - (countAged + countConjured + countLegendary);
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(new PieChart.Data("Legendary",countLegendary), new PieChart.Data("Conjured", countConjured), new PieChart.Data("Aged", countAged), new PieChart.Data("Normal", countNormal));
         pcItems.setData(pieChartData);
-        return pieChartData;
-    }
-
-    private void ApplyPieChartColors(ObservableList<PieChart.Data> pieChartData, String... pieColors) {
-        int i = 1;
-        for (PieChart.Data data : pieChartData) {
-            data.getNode().setStyle(
-                "-fx-pie-color: " + pieColors[i % pieColors.length] + ";"
-            );
-            i++;
-        }
     }
 
     private void DisplayInventory() {
@@ -202,8 +190,8 @@ public class Controller implements Initializable {
                 }
                 inventory.setItems(items);
                 DisplayInventory();
-                ObservableList<PieChart.Data> pieChartData = LoadPieChart();
-                ApplyPieChartColors(pieChartData, "green", "red", "blue", "orange");            }
+                LoadPieChart();
+            }
             catch (Exception e) {
                 throw new Throwable(e.getMessage());
 
