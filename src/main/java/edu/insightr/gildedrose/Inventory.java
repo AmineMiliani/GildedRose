@@ -86,8 +86,24 @@ public class Inventory {
     }
 
 
-    public void Delete(int selectedIdx) {
+    public void Delete(int selectedIdx)
+    {
         items[selectedIdx] = null;
+
+        Item[] newItemList = new Item[items.length - 1];
+
+        int compteur = 0;
+        for (int i =0; i<items.length; i++)
+        {
+            if (items[i] != null)
+            {
+                newItemList[compteur]=items[i];
+                compteur=compteur+1;
+            }
+        }
+
+        items = newItemList;
+
     }
 
     public void Add(String name, int selIn, int quality) {
