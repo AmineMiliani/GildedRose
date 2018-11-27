@@ -72,6 +72,9 @@ public class Controller implements Initializable {
     @FXML
     private PieChart pcItems;
 
+    @FXML
+    private BarChart bcSellIn;
+
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -99,6 +102,51 @@ public class Controller implements Initializable {
         int countNormal = inventory.getItems().length  - (countAged + countConjured + countLegendary);
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(new PieChart.Data("Legendary",countLegendary), new PieChart.Data("Conjured", countConjured), new PieChart.Data("Aged", countAged), new PieChart.Data("Normal", countNormal));
         pcItems.setData(pieChartData);
+    }
+    private void LoadBarChart()
+    {
+        class SellInHist{
+
+            int count;
+            String sellIn;
+
+            public SellInHist(int count, String sellIn)
+            {
+                this.count = count;
+                this.sellIn = sellIn;
+            }
+            public String getSellIn() {
+                return sellIn;
+            }
+            public int getCount() {
+                return count;
+            }
+            public void setCount(int count) {
+                this.count = count;
+            }
+        }
+        List<SellInHist> liste = new ArrayList<SellInHist>();
+        for (Item item: inventory.getItems())
+        {
+            for (SellInHist element: liste)
+            {
+                if(liste == null)
+                {
+                    SellInHist a = new SellInHist(1, String.valueOf(item.getSellIn()));
+                    liste.add(a);
+                }
+                else if(element.getSellIn() == String.valueOf(item.getSellIn()))
+                {
+                    element.setCount(element.count++);
+                }
+                else if(element.getSellIn() != String.valueOf(item.getSellIn()))
+                {
+                    SellInHist a = new SellInHist(1, String.valueOf(item.getSellIn()));
+                    liste.add(a);
+                }
+            }
+        }
+        XYChart.Series<String, Number> barChartData = new XYChart.Series<>();
     }
 
     private void DisplayInventory()
