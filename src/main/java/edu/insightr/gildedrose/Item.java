@@ -8,7 +8,7 @@ public class Item implements Serializable {
 
     private String name;
     private int sellIn;
-    private LocalDate creationDate;
+    private String creationDate;
     private int quality;
 
     public Item(String name, int sellIn, int quality, String creationDate){
@@ -16,16 +16,16 @@ public class Item implements Serializable {
         this.name = name;
         this.sellIn = sellIn;
         this.quality = quality;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        this.creationDate = LocalDate.parse(creationDate, formatter);
+        this.creationDate = creationDate;
     }
+
     public Item(){
 
     }
-    public LocalDate getCreationDate() {
+    public String getCreationDate() {
         return creationDate;
     }
-    public void setCreationDate(LocalDate creationDate) {
+    public void setCreationDate(String creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -63,7 +63,7 @@ public class Item implements Serializable {
                 "name='" + name + '\'' +
                 ", sellIn=" + sellIn +
                 ", quality=" + quality +
-                ", date=" + creationDate +
+                ", creationDate=" + creationDate +
                 '}';
     }
 }

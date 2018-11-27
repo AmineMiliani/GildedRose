@@ -249,8 +249,7 @@ public class Controller implements Initializable {
                 }
                 inventory.setItems(items);
                 DisplayInventory();
-                LoadPieChart();
-            }
+        }
             catch (Exception e) {
                 throw new Throwable(e.getMessage());
 

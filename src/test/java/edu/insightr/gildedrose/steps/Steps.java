@@ -61,8 +61,8 @@ public class Steps {
             throw new Throwable(e.getMessage());
         }
     }
-
-    /*@When("^I add a new item$")
+/*
+    @When("^I add a new item$")
     public void iAddANewItem() throws Throwable {
         try {
             inventory.Add("testNewItem", 5, 5);
