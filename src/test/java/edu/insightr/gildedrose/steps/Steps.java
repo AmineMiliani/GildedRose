@@ -62,14 +62,14 @@ public class Steps {
         }
     }
 
-    @When("^I add a new item$")
+    /*@When("^I add a new item$")
     public void iAddANewItem() throws Throwable {
         try {
             inventory.Add("testNewItem", 5, 5);
         } catch (Exception e) {
             throw new Throwable(e.getMessage());
         }
-    }
+    }*/
     @When("^I delete an item$")
     public void iDeleteAnItem() throws Throwable {
         try {
