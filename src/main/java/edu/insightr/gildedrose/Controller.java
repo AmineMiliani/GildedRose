@@ -281,7 +281,7 @@ public class Controller implements Initializable {
         int selectedIdx = listViewItems.getSelectionModel().getSelectedIndex();
         Item item = inventory.getItems()[selectedIdx];
         inventory.Delete(selectedIdx);
-        Transaction transaction = new Transaction("sold" ,item);
+        Transaction transaction = new Transaction("SOLD" ,item);
         transactions.add(transaction);
         DisplayInventory();
 
@@ -300,7 +300,7 @@ public class Controller implements Initializable {
             inventory.Add(name, selInInt, qualityInt, date);
 
             Item item = new Item (name, selInInt, qualityInt, date);
-            Transaction transaction = new Transaction("bought" ,item);
+            Transaction transaction = new Transaction("BOUGHT" ,item);
             transactions.add(transaction);
 
             DisplayInventory();

@@ -15,10 +15,11 @@ public class Transaction {
         this.transactionDate= LocalDate.now().toString();
 
     }
+    
     @Override
     public String toString ()
     {
-        return "Name=" +item.getName()+" Action=" + action + " Price=" + item.getSellIn() + " Transaction Date=" + transactionDate;
+        return action+ " I "+ item.getName() + " at " + item.getSellIn() + "$ the " + transactionDate;
     }
 
 }
