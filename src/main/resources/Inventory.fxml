@@ -33,4 +33,12 @@
        <NumberAxis label="Number of items" side="LEFT" />
      </yAxis>
    </BarChart>
+   <BarChart fx:id="bcDate" blendMode="DARKEN" layoutX="541.0" layoutY="386.0" prefHeight="252.0" prefWidth="339.0" title="Number of items sold by creation date">
+      <xAxis>
+         <CategoryAxis label="Creation date" nodeOrientation="LEFT_TO_RIGHT" side="BOTTOM" />
+      </xAxis>
+      <yAxis>
+         <NumberAxis label="Number of items" side="LEFT" />
+      </yAxis>
+   </BarChart>
 </AnchorPane>

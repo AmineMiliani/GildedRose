@@ -76,6 +76,8 @@ public class Controller implements Initializable {
     @FXML
     private BarChart bcSellIn;
 
+    @FXML
+    private BarChart bcDate;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -104,7 +106,7 @@ public class Controller implements Initializable {
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(new PieChart.Data("Legendary",countLegendary), new PieChart.Data("Conjured", countConjured), new PieChart.Data("Aged", countAged), new PieChart.Data("Normal", countNormal));
         pcItems.setData(pieChartData);
     }
-    private void LoadBarChart()
+    private void LoadBarChartSellIn()
     {
         bcSellIn.getData().clear();
         //bcSellIn.xAxis.setLabel("sellIn");
@@ -171,6 +173,74 @@ public class Controller implements Initializable {
         }
         bcSellIn.getData().add(serie);
     }
+    private void LoadBarChartDate()
+    {
+        bcDate.getData().clear();
+        class dateHist
+        {
+            private int count;
+            private String date;
+
+            private dateHist(int count, String date)
+            {
+                this.count=count;
+                this.date=date;
+            }
+
+            private int getCount()
+            {
+                return count;
+            }
+            private String getDate()
+            {
+                return date;
+            }
+        }
+
+        List<dateHist> list = new ArrayList<dateHist>();
+        for (Item item: inventory.getItems())
+        {
+            int count = 0;
+            if(list.size() == 0)
+            {
+                dateHist a = new dateHist(1,item.getCreationDate());
+                list.add(a);
+            }
+            for (dateHist element: list)
+            {
+                try
+                {
+                    if(item.getCreationDate() == element.getDate())
+                    {
+                        element.count++;
+                        break;
+                    }
+                    else
+                    {
+                        count++;
+                    }
+                }
+                catch(Exception e)
+                {
+                    System.out.println(e);
+                }
+            }
+            if(count == list.size())
+            {
+                dateHist a = new dateHist(1,item.getCreationDate());
+                list.add(a);
+            }
+        }
+        //Arrangement de la liste
+        list.get(0).count--;
+        //BarChart
+        XYChart.Series serie = new XYChart.Series();
+        for (dateHist item: list)
+        {
+            serie.getData().add(new XYChart.Data(item.getDate(), item.getCount()));
+        }
+        bcDate.getData().add(serie);
+    }
 
     private void DisplayInventory()
     {
@@ -189,7 +259,8 @@ public class Controller implements Initializable {
 
         listViewItems.setItems(newItemList);
         LoadPieChart();
-        LoadBarChart();
+        LoadBarChartSellIn();
+        LoadBarChartDate();
     }
 
     public void OnUpdate() {
