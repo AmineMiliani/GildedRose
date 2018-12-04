@@ -25,12 +25,12 @@
     <Label layoutX="35.0" layoutY="163.0" text="Quality" />
     <Button fx:id="buttonFileChooser" layoutX="46.0" layoutY="254.0" mnemonicParsing="false" onAction="#OnFileChooser" text="Load a file" />
     <PieChart fx:id="pcItems" layoutX="626.0" layoutY="38.0" prefHeight="323.0" prefWidth="342.0" />
-   <BarChart fx:id="bcSellIn" layoutX="49.0" layoutY="393.0" prefHeight="252.0" prefWidth="339.0">
+   <BarChart fx:id="bcSellIn" blendMode="DARKEN" layoutX="49.0" layoutY="393.0" prefHeight="252.0" prefWidth="339.0" title="Number of items sold by Sell In">
      <xAxis>
-       <CategoryAxis side="BOTTOM" />
+       <CategoryAxis label="Sell In" nodeOrientation="LEFT_TO_RIGHT" side="BOTTOM" />
      </xAxis>
      <yAxis>
-       <NumberAxis side="LEFT" />
+       <NumberAxis label="Number of items" side="LEFT" />
      </yAxis>
    </BarChart>
 </AnchorPane>

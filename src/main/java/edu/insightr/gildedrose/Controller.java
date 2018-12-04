@@ -14,12 +14,13 @@ import javafx.scene.control.ListView;
 import java.io.*;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-import java.util.List;
+import java.util.*;
+
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.scene.chart.*;
+import java.lang.String;
+
 
 public class Controller implements Initializable {
 
@@ -105,48 +106,70 @@ public class Controller implements Initializable {
     }
     private void LoadBarChart()
     {
+        bcSellIn.getData().clear();
+        //bcSellIn.xAxis.setLabel("sellIn");
+        //yAxis.setLabel("Number of items");
         class SellInHist{
 
-            int count;
-            String sellIn;
+            private int count;
+            private int sellIn;
 
-            public SellInHist(int count, String sellIn)
+            private SellInHist(int count, int sellIn)
             {
                 this.count = count;
                 this.sellIn = sellIn;
             }
-            public String getSellIn() {
+            private int getSellIn() {
                 return sellIn;
             }
-            public int getCount() {
+            private int getCount() {
                 return count;
             }
-            public void setCount(int count) {
-                this.count = count;
-            }
         }
-        List<SellInHist> liste = new ArrayList<SellInHist>();
+        List<SellInHist> list = new ArrayList<SellInHist>();
+
         for (Item item: inventory.getItems())
         {
-            for (SellInHist element: liste)
+            int count = 0;
+            if(list.size()==0)
             {
-                if(liste == null)
+                SellInHist a = new SellInHist(1,item.getSellIn());
+                list.add(a);
+            }
+            for (SellInHist element: list)
+            {
+                try
                 {
-                    SellInHist a = new SellInHist(1, String.valueOf(item.getSellIn()));
-                    liste.add(a);
+                    if(item.getSellIn() == element.getSellIn())
+                    {
+                        element.count++;
+                        break;
+                    }
+                    else
+                    {
+                        count++;
+                    }
                 }
-                else if(element.getSellIn() == String.valueOf(item.getSellIn()))
+                catch(Exception e)
                 {
-                    element.setCount(element.count++);
-                }
-                else if(element.getSellIn() != String.valueOf(item.getSellIn()))
-                {
-                    SellInHist a = new SellInHist(1, String.valueOf(item.getSellIn()));
-                    liste.add(a);
+                    System.out.println(e);
                 }
             }
+            if(count == list.size())
+            {
+                SellInHist a = new SellInHist(1,item.getSellIn());
+                list.add(a);
+            }
         }
-        XYChart.Series<String, Number> barChartData = new XYChart.Series<>();
+        //Arrangement de la liste
+        list.get(0).count--;
+        //BarChart
+        XYChart.Series serie = new XYChart.Series();
+        for (SellInHist item: list)
+        {
+            serie.getData().add(new XYChart.Data(String.valueOf(item.getSellIn()), item.getCount()));
+        }
+        bcSellIn.getData().add(serie);
     }
 
     private void DisplayInventory()
@@ -166,6 +189,7 @@ public class Controller implements Initializable {
 
         listViewItems.setItems(newItemList);
         LoadPieChart();
+        LoadBarChart();
     }
 
     public void OnUpdate() {

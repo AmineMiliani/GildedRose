@@ -22,6 +22,7 @@ public class Inventory {
                 new Item("Legendary Sulfuras, Hand of Ragnaros", 0, 80,"11-09-2018" ),
                 new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20,"11-09-2018" ),
                 new Item("Conjured Mana Cake", 1, 16,"11-09-2018" ),
+                new Item("Legendary Torse Vaal Hazak alpha", 15, 10, "04-12-2018")
 
         };
 
