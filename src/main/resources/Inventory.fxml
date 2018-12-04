@@ -10,7 +10,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="673.0" prefWidth="968.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.insightr.gildedrose.Controller">
+<AnchorPane prefHeight="674.0" prefWidth="1344.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.insightr.gildedrose.Controller">
     <ListView fx:id="listViewItems" layoutX="193.0" layoutY="35.0" prefHeight="255.0" prefWidth="365.0" />
     <Button fx:id="buttonUpdate" layoutX="398.0" layoutY="307.0" mnemonicParsing="false" onAction="#OnUpdate" prefHeight="60.0" prefWidth="161.0" text="Update" />
     <Button fx:id="buttonAdd" layoutX="37.0" layoutY="311.0" mnemonicParsing="false" onAction="#OnAdd" prefHeight="50.0" prefWidth="86.0" text="Add" />
@@ -41,4 +41,5 @@
          <NumberAxis label="Number of items" side="LEFT" />
       </yAxis>
    </BarChart>
+   <ListView fx:id="transactionListView" layoutX="968.0" layoutY="412.0" prefHeight="188.0" prefWidth="355.0" />
 </AnchorPane>

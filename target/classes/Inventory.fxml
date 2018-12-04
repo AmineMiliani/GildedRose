@@ -10,7 +10,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="673.0" prefWidth="968.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.insightr.gildedrose.Controller">
+<AnchorPane prefHeight="674.0" prefWidth="1344.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.insightr.gildedrose.Controller">
     <ListView fx:id="listViewItems" layoutX="193.0" layoutY="35.0" prefHeight="255.0" prefWidth="365.0" />
     <Button fx:id="buttonUpdate" layoutX="398.0" layoutY="307.0" mnemonicParsing="false" onAction="#OnUpdate" prefHeight="60.0" prefWidth="161.0" text="Update" />
     <Button fx:id="buttonAdd" layoutX="37.0" layoutY="311.0" mnemonicParsing="false" onAction="#OnAdd" prefHeight="50.0" prefWidth="86.0" text="Add" />
@@ -25,7 +25,7 @@
     <Label layoutX="35.0" layoutY="163.0" text="Quality" />
     <Button fx:id="buttonFileChooser" layoutX="46.0" layoutY="254.0" mnemonicParsing="false" onAction="#OnFileChooser" text="Load a file" />
     <PieChart fx:id="pcItems" layoutX="626.0" layoutY="38.0" prefHeight="323.0" prefWidth="342.0" />
-   <BarChart fx:id="bcSellIn" layoutX="49.0" layoutY="393.0" prefHeight="252.0" prefWidth="339.0">
+   <BarChart fx:id="bcSellIn" blendMode="DARKEN" layoutX="49.0" layoutY="393.0" prefHeight="252.0" prefWidth="339.0" title="Number of items sold by Sell In">
      <xAxis>
        <CategoryAxis label="Sell In" nodeOrientation="LEFT_TO_RIGHT" side="BOTTOM" />
      </xAxis>
@@ -33,4 +33,13 @@
        <NumberAxis label="Number of items" side="LEFT" />
      </yAxis>
    </BarChart>
+   <BarChart fx:id="bcDate" blendMode="DARKEN" layoutX="541.0" layoutY="386.0" prefHeight="252.0" prefWidth="339.0" title="Number of items sold by creation date">
+      <xAxis>
+         <CategoryAxis label="Creation date" nodeOrientation="LEFT_TO_RIGHT" side="BOTTOM" />
+      </xAxis>
+      <yAxis>
+         <NumberAxis label="Number of items" side="LEFT" />
+      </yAxis>
+   </BarChart>
+   <ListView fx:id="transactionListView" layoutX="968.0" layoutY="412.0" prefHeight="188.0" prefWidth="355.0" />
 </AnchorPane>

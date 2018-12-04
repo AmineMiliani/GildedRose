@@ -24,9 +24,13 @@ import java.lang.String;
 
 public class Controller implements Initializable {
 
+    private List<Transaction> transactions;
     private Inventory inventory;
     @FXML
     private ListView<Item> listViewItems;
+
+    @FXML
+    private ListView<Transaction> transactionListView;
 
     @FXML
     private Button buttonUpdate;
@@ -84,6 +88,122 @@ public class Controller implements Initializable {
         inventory = new Inventory();
         DisplayInventory();
         LoadPieChart();
+        transactions = new List<Transaction>() {
+            @Override
+            public int size() {
+                return 0;
+            }
+
+            @Override
+            public boolean isEmpty() {
+                return false;
+            }
+
+            @Override
+            public boolean contains(Object o) {
+                return false;
+            }
+
+            @Override
+            public Iterator<Transaction> iterator() {
+                return null;
+            }
+
+            @Override
+            public Object[] toArray() {
+                return new Object[0];
+            }
+
+            @Override
+            public <T> T[] toArray(T[] a) {
+                return null;
+            }
+
+            @Override
+            public boolean add(Transaction transaction) {
+                return false;
+            }
+
+            @Override
+            public boolean remove(Object o) {
+                return false;
+            }
+
+            @Override
+            public boolean containsAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(Collection<? extends Transaction> c) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(int index, Collection<? extends Transaction> c) {
+                return false;
+            }
+
+            @Override
+            public boolean removeAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public boolean retainAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public void clear() {
+
+            }
+
+            @Override
+            public Transaction get(int index) {
+                return null;
+            }
+
+            @Override
+            public Transaction set(int index, Transaction element) {
+                return null;
+            }
+
+            @Override
+            public void add(int index, Transaction element) {
+
+            }
+
+            @Override
+            public Transaction remove(int index) {
+                return null;
+            }
+
+            @Override
+            public int indexOf(Object o) {
+                return 0;
+            }
+
+            @Override
+            public int lastIndexOf(Object o) {
+                return 0;
+            }
+
+            @Override
+            public ListIterator<Transaction> listIterator() {
+                return null;
+            }
+
+            @Override
+            public ListIterator<Transaction> listIterator(int index) {
+                return null;
+            }
+
+            @Override
+            public List<Transaction> subList(int fromIndex, int toIndex) {
+                return null;
+            }
+        } ;
     }
 
     private int Count(String groupName)
@@ -257,6 +377,8 @@ public class Controller implements Initializable {
             }
         }
 
+        ObservableList<Transaction> transactionList = FXCollections.observableArrayList(transactions);
+        transactionListView.setItems(transactionList);
         listViewItems.setItems(newItemList);
         LoadPieChart();
         LoadBarChartSellIn();
@@ -271,8 +393,12 @@ public class Controller implements Initializable {
 
     public void OnDelete() {
         int selectedIdx = listViewItems.getSelectionModel().getSelectedIndex();
+        Item item = inventory.getItems()[selectedIdx];
         inventory.Delete(selectedIdx);
+        Transaction transaction = new Transaction("sold" ,item);
+        transactions.add(transaction);
         DisplayInventory();
+
 
     }
 
@@ -286,6 +412,11 @@ public class Controller implements Initializable {
             String name = nameBox.getText();
             String date = LocalDate.now().toString();
             inventory.Add(name, selInInt, qualityInt, date);
+
+            Item item = new Item (name, selInInt, qualityInt, date);
+            Transaction transaction = new Transaction("bought" ,item);
+            transactions.add(transaction);
+
             DisplayInventory();
         } catch (Exception e) {
             throw new Throwable(e.getMessage());
