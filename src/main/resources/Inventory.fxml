@@ -42,4 +42,13 @@
       </yAxis>
    </BarChart>
    <ListView fx:id="transactionListView" layoutX="968.0" layoutY="412.0" prefHeight="188.0" prefWidth="355.0" />
+   <BarChart fx:id="bcTransactions" blendMode="DARKEN" layoutX="981.0" layoutY="87.0" prefHeight="252.0" prefWidth="339.0" title="Number of item by transaction time">
+      <xAxis>
+         <CategoryAxis label="Time" nodeOrientation="LEFT_TO_RIGHT" side="BOTTOM" />
+      </xAxis>
+      <yAxis>
+         <NumberAxis label="Number of items" side="LEFT" />
+      </yAxis>
+   </BarChart>
+   <AnchorPane prefHeight="200.0" prefWidth="200.0" />
 </AnchorPane>

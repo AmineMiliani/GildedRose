@@ -24,7 +24,8 @@ import java.lang.String;
 
 public class Controller implements Initializable {
 
-    private ArrayList<Transaction> transactions;
+    private ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+
     private Inventory inventory;
     @FXML
     private ListView<Item> listViewItems;
@@ -83,12 +84,20 @@ public class Controller implements Initializable {
     @FXML
     private BarChart bcDate;
 
+    @FXML
+    private BarChart bcTransactions;
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         inventory = new Inventory();
+        for (Item item:inventory.getItems())
+        {
+            Transaction transa = new Transaction("bought", item);
+            transactions.add(transa);
+        }
         DisplayInventory();
         LoadPieChart();
-        transactions = new ArrayList<Transaction>();
+        LoadPieChart();
     }
 
     private int Count(String groupName)
@@ -168,6 +177,7 @@ public class Controller implements Initializable {
                 list.add(a);
             }
         }
+        bcSellIn.setCategoryGap(15);
         //Arrangement de la liste
         list.get(0).count--;
         //BarChart
@@ -246,6 +256,113 @@ public class Controller implements Initializable {
         }
         bcDate.getData().add(serie);
     }
+    private void LoadBarChartTrail()
+    {
+        bcTransactions.getData().clear();
+        class ItemDate
+        {
+            private int count;
+            private String transactionDate;
+
+            private ItemDate(int count, String transactionDate)
+            {
+                this.count = count;
+                this.transactionDate = transactionDate;
+            }
+            private int getCount()
+            {
+                return count;
+            }
+            private String getTransactionDate()
+            {
+                return transactionDate;
+            }
+        }
+        List<ItemDate> bought = new ArrayList<>();
+        List<ItemDate> sold = new ArrayList<>();
+
+        if(transactions.size() != 0)
+        {
+
+            for (Transaction item: transactions)
+            {
+                int count = 0;
+                if(item.getAction().equals("bought"))
+                {
+                    if(bought.size() == 0)
+                    {
+                        ItemDate a = new ItemDate(1, item.getTransactionDate());
+                        bought.add(a);
+                    }
+                    for (ItemDate element: bought)
+                    {
+                        if(item.getTransactionDate().equals(element.getTransactionDate()))
+                        {
+                            element.count++;
+                            break;
+                        }
+                        else
+                            count++;
+                    }
+                    if(bought.size() == count)
+                    {
+                        ItemDate a = new ItemDate(1, item.getTransactionDate());
+                        bought.add(a);
+                    }
+                }
+                else if(item.getAction().equals("sold"))
+                {
+                    if(sold.size() == 0)
+                    {
+                        ItemDate a = new ItemDate(1, item.getTransactionDate());
+                        sold.add(a);
+                    }
+                    for (ItemDate element: sold)
+                    {
+                        if(item.getTransactionDate().equals(element.getTransactionDate()))
+                        {
+                            element.count++;
+                            break;
+                        }
+                        else
+                            count++;
+                    }
+                    if(sold.size() == count)
+                    {
+                        ItemDate a = new ItemDate(1, item.getTransactionDate());
+                        sold.add(a);
+                    }
+                }
+                else
+                {
+                    System.out.println("Item nor bought nor sold");
+                }
+            }
+            if(bought.size() != 0)
+            {
+                bought.get(0).count--;
+            }
+            if(sold.size() != 0)
+            {
+                sold.get(0).count--;
+            }
+
+            XYChart.Series BYE = new XYChart.Series();
+            BYE.setName("Bought");
+            XYChart.Series SELL = new XYChart.Series();
+            SELL.setName("SOLD");
+            for (ItemDate item: bought)
+            {
+                BYE.getData().add(new XYChart.Data(item.getTransactionDate(), item.getCount()));
+            }
+            for (ItemDate item: sold)
+            {
+                SELL.getData().add(new XYChart.Data(item.getTransactionDate(), item.getCount()));
+            }
+            bcTransactions.getData().add(BYE);
+            bcTransactions.getData().add(SELL);
+        }
+    }
 
     private void DisplayInventory()
     {
@@ -269,6 +386,7 @@ public class Controller implements Initializable {
         LoadPieChart();
         LoadBarChartSellIn();
         LoadBarChartDate();
+        LoadBarChartTrail();
     }
 
     public void OnUpdate() {
