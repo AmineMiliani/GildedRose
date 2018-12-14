@@ -22,7 +22,7 @@ public class Item implements Serializable {
     public Item(){
 
     }
-    public String getCreationDate() {
+    String getCreationDate() {
         return creationDate;
     }
     public void setCreationDate(String creationDate) {
@@ -49,6 +49,7 @@ public class Item implements Serializable {
     public int getQuality() {
         return quality;
     }
+
 
     public void setQuality(int quality) {
         this.quality = quality;

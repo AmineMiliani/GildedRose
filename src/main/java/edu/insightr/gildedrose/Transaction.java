@@ -10,17 +10,17 @@ public class Transaction {
     private String transactionDate;
     private Item item;
 
-    public Transaction (String action, Item item)
+    Transaction(String action, Item item)
     {
         this.action = action;
         this.item = item;
         this.transactionDate= LocalDate.now().toString();
     }
-    public String getAction()
+    String getAction()
     {
         return action;
     }
-    public String getTransactionDate()
+    String getTransactionDate()
     {
         return transactionDate;
     }
@@ -28,7 +28,14 @@ public class Transaction {
     @Override
     public String toString ()
     {
-        return action+ " I "+ item.getName() + " at " + item.getSellIn() + "$ the " + transactionDate;
+        if(action.contains("sold")) {
+            return action + "      | " + item.getName() + " at " + item.getSellIn() + "$ the " + transactionDate;
+        }
+        else
+        {
+            return action+ " | "+ item.getName() + " at " + item.getSellIn() + "$ the " + transactionDate;
+
+        }
     }
 
 }

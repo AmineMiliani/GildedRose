@@ -24,7 +24,7 @@ import java.lang.String;
 
 public class Controller implements Initializable {
 
-    private ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+    private ArrayList<Transaction> transactions = new ArrayList<>();
 
     private Inventory inventory;
     @FXML
@@ -120,6 +120,7 @@ public class Controller implements Initializable {
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(new PieChart.Data("Legendary",countLegendary), new PieChart.Data("Conjured", countConjured), new PieChart.Data("Aged", countAged), new PieChart.Data("Normal", countNormal));
         pcItems.setData(pieChartData);
     }
+    @SuppressWarnings("unchecked")
     private void LoadBarChartSellIn()
     {
         bcSellIn.getData().clear();
@@ -142,7 +143,7 @@ public class Controller implements Initializable {
                 return count;
             }
         }
-        List<SellInHist> list = new ArrayList<SellInHist>();
+        List<SellInHist> list = new ArrayList<>();
 
         for (Item item: inventory.getItems())
         {
@@ -188,6 +189,7 @@ public class Controller implements Initializable {
         }
         bcSellIn.getData().add(serie);
     }
+    @SuppressWarnings("unchecked")
     private void LoadBarChartDate()
     {
         bcDate.getData().clear();
@@ -212,7 +214,7 @@ public class Controller implements Initializable {
             }
         }
 
-        List<dateHist> list = new ArrayList<dateHist>();
+        List<dateHist> list = new ArrayList<>();
         for (Item item: inventory.getItems())
         {
             int count = 0;
@@ -225,7 +227,7 @@ public class Controller implements Initializable {
             {
                 try
                 {
-                    if(item.getCreationDate() == element.getDate())
+                    if(item.getCreationDate().equals(element.getDate()))
                     {
                         element.count++;
                         break;
@@ -256,6 +258,7 @@ public class Controller implements Initializable {
         }
         bcDate.getData().add(serie);
     }
+    @SuppressWarnings("unchecked")
     private void LoadBarChartTrail()
     {
         bcTransactions.getData().clear();
@@ -287,55 +290,44 @@ public class Controller implements Initializable {
             for (Transaction item: transactions)
             {
                 int count = 0;
-                if(item.getAction().equals("bought"))
-                {
-                    if(bought.size() == 0)
-                    {
-                        ItemDate a = new ItemDate(1, item.getTransactionDate());
-                        bought.add(a);
-                    }
-                    for (ItemDate element: bought)
-                    {
-                        if(item.getTransactionDate().equals(element.getTransactionDate()))
-                        {
-                            element.count++;
-                            break;
+                switch (item.getAction()) {
+                    case "bought":
+                        if (bought.size() == 0) {
+                            ItemDate a = new ItemDate(1, item.getTransactionDate());
+                            bought.add(a);
                         }
-                        else
-                            count++;
-                    }
-                    if(bought.size() == count)
-                    {
-                        ItemDate a = new ItemDate(1, item.getTransactionDate());
-                        bought.add(a);
-                    }
-                }
-                else if(item.getAction().equals("sold"))
-                {
-                    if(sold.size() == 0)
-                    {
-                        ItemDate a = new ItemDate(1, item.getTransactionDate());
-                        sold.add(a);
-                    }
-                    for (ItemDate element: sold)
-                    {
-                        if(item.getTransactionDate().equals(element.getTransactionDate()))
-                        {
-                            element.count++;
-                            break;
+                        for (ItemDate element : bought) {
+                            if (item.getTransactionDate().equals(element.getTransactionDate())) {
+                                element.count++;
+                                break;
+                            } else
+                                count++;
                         }
-                        else
-                            count++;
-                    }
-                    if(sold.size() == count)
-                    {
-                        ItemDate a = new ItemDate(1, item.getTransactionDate());
-                        sold.add(a);
-                    }
-                }
-                else
-                {
-                    System.out.println("Item nor bought nor sold");
+                        if (bought.size() == count) {
+                            ItemDate a = new ItemDate(1, item.getTransactionDate());
+                            bought.add(a);
+                        }
+                        break;
+                    case "sold":
+                        if (sold.size() == 0) {
+                            ItemDate a = new ItemDate(1, item.getTransactionDate());
+                            sold.add(a);
+                        }
+                        for (ItemDate element : sold) {
+                            if (item.getTransactionDate().equals(element.getTransactionDate())) {
+                                element.count++;
+                                break;
+                            } else
+                                count++;
+                        }
+                        if (sold.size() == count) {
+                            ItemDate a = new ItemDate(1, item.getTransactionDate());
+                            sold.add(a);
+                        }
+                        break;
+                    default:
+                        System.out.println("Item nor bought nor sold");
+                        break;
                 }
             }
             if(bought.size() != 0)
@@ -350,7 +342,7 @@ public class Controller implements Initializable {
             XYChart.Series BYE = new XYChart.Series();
             BYE.setName("Bought");
             XYChart.Series SELL = new XYChart.Series();
-            SELL.setName("SOLD");
+            SELL.setName("Sold");
             for (ItemDate item: bought)
             {
                 BYE.getData().add(new XYChart.Data(item.getTransactionDate(), item.getCount()));
@@ -399,7 +391,7 @@ public class Controller implements Initializable {
         int selectedIdx = listViewItems.getSelectionModel().getSelectedIndex();
         Item item = inventory.getItems()[selectedIdx];
         inventory.Delete(selectedIdx);
-        Transaction transaction = new Transaction("SOLD" ,item);
+        Transaction transaction = new Transaction("sold" ,item);
         transactions.add(transaction);
         DisplayInventory();
 
