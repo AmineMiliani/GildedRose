@@ -30,7 +30,7 @@
        <CategoryAxis label="Sell In" nodeOrientation="LEFT_TO_RIGHT" side="BOTTOM" />
      </xAxis>
      <yAxis>
-       <NumberAxis label="Number of items" side="LEFT" />
+       <NumberAxis fx:id="yAxisSellIn" label="Number of items" side="LEFT" />
      </yAxis>
    </BarChart>
    <BarChart fx:id="bcDate" blendMode="DARKEN" layoutX="541.0" layoutY="386.0" prefHeight="252.0" prefWidth="339.0" title="Number of items sold by creation date">
@@ -38,7 +38,7 @@
          <CategoryAxis label="Creation date" nodeOrientation="LEFT_TO_RIGHT" side="BOTTOM" />
       </xAxis>
       <yAxis>
-         <NumberAxis label="Number of items" side="LEFT" />
+         <NumberAxis fx:id="yAxisDate" label="Number of items" side="LEFT" />
       </yAxis>
    </BarChart>
    <ListView fx:id="transactionListView" layoutX="968.0" layoutY="412.0" prefHeight="188.0" prefWidth="355.0" />
@@ -47,7 +47,7 @@
          <CategoryAxis label="Time" nodeOrientation="LEFT_TO_RIGHT" side="BOTTOM" />
       </xAxis>
       <yAxis>
-         <NumberAxis label="Number of items" side="LEFT" />
+         <NumberAxis fx:id="yAxisTransaction" label="Number of items" side="LEFT" />
       </yAxis>
    </BarChart>
    <AnchorPane prefHeight="200.0" prefWidth="200.0" />

@@ -82,10 +82,19 @@ public class Controller implements Initializable {
     private BarChart bcSellIn;
 
     @FXML
+    private NumberAxis yAxisSellin;
+
+    @FXML
     private BarChart bcDate;
 
     @FXML
+    private NumberAxis yAxisDate;
+
+    @FXML
     private BarChart bcTransactions;
+
+    @FXML
+    private NumberAxis yAxisTransaction;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -124,8 +133,7 @@ public class Controller implements Initializable {
     private void LoadBarChartSellIn()
     {
         bcSellIn.getData().clear();
-        //bcSellIn.xAxis.setLabel("sellIn");
-        //yAxis.setLabel("Number of items");
+
         class SellInHist{
 
             private int count;
@@ -178,21 +186,26 @@ public class Controller implements Initializable {
                 list.add(a);
             }
         }
-        bcSellIn.setCategoryGap(15);
+
         //Arrangement de la liste
         list.get(0).count--;
         //BarChart
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setAutoRanging(true);
+
         XYChart.Series serie = new XYChart.Series();
         for (SellInHist item: list)
         {
             serie.getData().add(new XYChart.Data(String.valueOf(item.getSellIn()), item.getCount()));
         }
         bcSellIn.getData().add(serie);
+        bcSellIn.setCategoryGap(15);
     }
     @SuppressWarnings("unchecked")
     private void LoadBarChartDate()
     {
         bcDate.getData().clear();
+
         class dateHist
         {
             private int count;
@@ -340,9 +353,9 @@ public class Controller implements Initializable {
             }
 
             XYChart.Series BYE = new XYChart.Series();
-            BYE.setName("Bought");
+            BYE.setName("BOUGHT");
             XYChart.Series SELL = new XYChart.Series();
-            SELL.setName("Sold");
+            SELL.setName("SOLD");
             for (ItemDate item: bought)
             {
                 BYE.getData().add(new XYChart.Data(item.getTransactionDate(), item.getCount()));
@@ -410,7 +423,7 @@ public class Controller implements Initializable {
             inventory.Add(name, selInInt, qualityInt, date);
 
             Item item = new Item (name, selInInt, qualityInt, date);
-            Transaction transaction = new Transaction("BOUGHT" ,item);
+            Transaction transaction = new Transaction("bought" ,item);
             transactions.add(transaction);
 
             DisplayInventory();
